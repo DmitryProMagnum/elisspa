@@ -1,0 +1,9 @@
+# local sources & dev
+_src/
+.claude/
+node_modules/
+# os / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
