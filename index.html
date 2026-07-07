@@ -304,8 +304,10 @@
   #about{position:relative; background:var(--espresso); border-top:1px solid var(--hair-d); padding:54px 0 54px; overflow:hidden;}
   #about::before{content:""; position:absolute; inset:0; opacity:.05; pointer-events:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");}
-  .about-grid{position:relative; display:grid; grid-template-columns:minmax(280px,420px) 1fr; gap:64px; align-items:center; max-width:1180px; margin:0 auto; padding:0 46px;}
-  .about-fig{position:relative;}
+  .about-grid{position:relative; display:grid; grid-template-columns:minmax(280px,420px) 1fr; column-gap:64px; row-gap:0; align-items:start; grid-template-areas:"fig head" "fig body"; max-width:1180px; margin:0 auto; padding:0 46px;}
+  .about-head{grid-area:head;}
+  .about-body{grid-area:body;}
+  .about-fig{position:relative; grid-area:fig; align-self:center;}
   .about-fig .frame{display:block; width:100%;}
   .about-fig .frame .plate{width:100%; aspect-ratio:4/5;}
   .about-fig .stamp{position:absolute; right:-20px; bottom:24px; z-index:3; width:112px; height:112px; border-radius:50%; background:var(--espresso); border:1px solid var(--gold); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
@@ -424,7 +426,7 @@
     .masters-grid{grid-template-columns:repeat(2,1fr); gap:22px;}
     .mcard.offset{transform:none;}
     .visit-grid{grid-template-columns:1fr; gap:44px;}
-    .about-grid{grid-template-columns:1fr; gap:40px;}
+    .about-grid{grid-template-columns:1fr; grid-template-areas:"head" "fig" "body"; column-gap:0; row-gap:28px;}
     .foot-grid{grid-template-columns:1fr 1fr;}
     .q-grid{grid-template-columns:repeat(3,1fr);}
     .q-grid.th{grid-template-columns:repeat(3,1fr);}
@@ -454,6 +456,7 @@
 
     #treatments{padding:34px 0 34px;}
     .svc-preview{display:none;}
+    .svc-dia{display:none;}
     .svc-row{grid-template-columns:auto 1fr; gap:6px 14px; padding:22px 0;}
     .svc-row:hover{padding-left:0; padding-right:0;}
     .svc-price{grid-column:1/-1; text-align:left; padding-left:44px; margin-top:6px;}
@@ -772,6 +775,10 @@
 <!-- ===================== ABOUT ===================== -->
 <section id="about">
   <div class="about-grid">
+    <div class="about-head reveal">
+      <span class="eyebrow about-eyebrow"><span class="diamond"></span> The Maison</span>
+      <h2>The best massage and spa <em>experience</em> in Dubai</h2>
+    </div>
     <div class="about-fig reveal">
       <div class="frame">
         <span class="ghost"></span>
@@ -779,9 +786,7 @@
       </div>
       <div class="stamp"><b>Elis</b><span>Spa · Dubai</span></div>
     </div>
-    <div class="reveal">
-      <span class="eyebrow about-eyebrow"><span class="diamond"></span> The Maison</span>
-      <h2>The best massage and spa <em>experience</em> in Dubai</h2>
+    <div class="about-body reveal">
       <p>Elis Spa is a premier European massage centre in Dubai, renowned for delivering the ultimate in health, wellness and relaxation. Every visit is designed to revitalise your mind, body and soul.</p>
       <p>As a leading Dubai massage centre, our success rests on a team of professional therapists. Highly experienced and continuously trained, they deliver an exceptionally hospitable service, and each massage is tailored for maximum benefit.</p>
       <div class="about-facts">
@@ -1152,6 +1157,9 @@
     burger.addEventListener('click', function(){ var o=mm.classList.toggle('open'); burger.classList.toggle('open',o); burger.setAttribute('aria-expanded', o?'true':'false'); });
     mm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeM); });
     window.addEventListener('resize', function(){ if(window.innerWidth>768) closeM(); });
+    // close the open menu when clicking/tapping anywhere outside it (and outside the burger)
+    document.addEventListener('click', function(e){ if(mm.classList.contains('open') && !mm.contains(e.target) && !burger.contains(e.target)) closeM(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && mm.classList.contains('open')) closeM(); });
   }
 
   // ---- therapist slider arrows (mobile) ----
