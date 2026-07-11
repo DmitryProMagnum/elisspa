@@ -1014,19 +1014,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   var WA = 'https://api.whatsapp.com/send/?phone=971508707137&type=phone_number&app_absent=0&text=';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---- WhatsApp click conversion tracking -> GTM dataLayer (event: whatsapp_click) ----
-  function trackWA(loc){ window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'whatsapp_click', wa_location: loc }); }
+  // ---- Click conversion tracking -> GTM dataLayer (whatsapp_click / phone_click) ----
+  // Delegated on document + closest() so it catches every entry point, incl. any
+  // dynamically rendered CTA. Bound to the element/class, never to the href value.
+  function pushDL(o){ window.dataLayer = window.dataLayer || []; window.dataLayer.push(o); }
+  function svcName(a){ var r=a.closest('.svc-row'), n=r&&r.querySelector('.svc-name'); return n?n.textContent.trim():null; }
+  function waSource(a){
+    if(a.classList.contains('wa-fab')) return 'sticky';
+    if(a.classList.contains('svc-book')) return 'service_card';
+    if(a.classList.contains('req')) return 'therapist';
+    if(a.closest('#visit')) return 'contact';
+    if(a.closest('footer')) return 'footer';
+    if(a.closest('header')) return 'header';
+    if(a.closest('.hero')) return 'hero';
+    return 'other';
+  }
+  function telSource(a){
+    if(a.closest('#visit')) return 'contact';
+    if(a.closest('footer')) return 'footer';
+    if(a.closest('header')) return 'header';
+    return 'other';
+  }
+  function trackWA(source, service){ pushDL({ event:'whatsapp_click', source: source||'other', service_name: service||null }); }
   document.addEventListener('click', function(e){
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     if(!a) return;
-    if(!/wa\.me|api\.whatsapp\.com|whatsapp:\/\//i.test(a.getAttribute('href') || '')) return;
-    var loc = a.classList.contains('wa-fab') ? 'fab'
-      : a.classList.contains('svc-book') ? 'service'
-      : a.classList.contains('req') ? 'therapist'
-      : a.closest('#visit') ? 'visit'
-      : a.closest('footer') ? 'footer'
-      : a.closest('header') ? 'header' : 'other';
-    trackWA(loc);
+    var href = a.getAttribute('href') || '';
+    if(/wa\.me|api\.whatsapp\.com|whatsapp:\/\//i.test(href)){
+      trackWA(waSource(a), a.classList.contains('svc-book') ? svcName(a) : null);
+    } else if(/^tel:/i.test(href)){
+      pushDL({ event:'phone_click', source: telSource(a) });
+    }
   }, true);
 
   // ---- reveal on scroll (hero entrance is pure CSS, no JS gate needed) ----
@@ -1105,7 +1123,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if(ritual) msg+='\nRitual: '+ritual;
       if(name) msg+='\nName: '+name;
       if(phone) msg+='\nPhone: '+phone;
-      trackWA('form');
+      trackWA('contact_form', ritual||null);
       window.open(WA+encodeURIComponent(msg),'_blank');
       form.style.display='none'; if(thanks) thanks.style.display='flex';
     });
@@ -1165,7 +1183,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
       if(name) msg+='\nName: '+name;
       if(phone) msg+='\nPhone: '+phone;
-      trackWA('quiz');
+      trackWA('quiz', (pick.consult?null:pick.ritual)||null);
       window.open(WA+encodeURIComponent(msg),'_blank');
       close();
     }

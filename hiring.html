@@ -317,16 +317,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-<!-- WhatsApp click conversion tracking -> GTM dataLayer (event: whatsapp_click) -->
+<!-- Click conversion tracking -> GTM dataLayer (whatsapp_click / phone_click) -->
 <script>
 (function(){
+  function pushDL(o){ window.dataLayer = window.dataLayer || []; window.dataLayer.push(o); }
+  function src(a){ return a.closest('header') ? 'header' : a.closest('.hero') ? 'hero' : a.closest('.apply') ? 'apply' : 'other'; }
   document.addEventListener('click', function(e){
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     if(!a) return;
-    if(!/wa\.me|api\.whatsapp\.com|whatsapp:\/\//i.test(a.getAttribute('href') || '')) return;
-    var loc = a.closest('header') ? 'hiring_header' : a.closest('.hero') ? 'hiring_hero' : a.closest('.apply') ? 'hiring_apply' : 'hiring';
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'whatsapp_click', wa_location: loc });
+    var href = a.getAttribute('href') || '';
+    if(/wa\.me|api\.whatsapp\.com|whatsapp:\/\//i.test(href)){
+      pushDL({ event:'whatsapp_click', source: src(a), service_name: null });
+    } else if(/^tel:/i.test(href)){
+      pushDL({ event:'phone_click', source: src(a) });
+    }
   }, true);
 })();
 </script>
