@@ -1014,6 +1014,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   var WA = 'https://api.whatsapp.com/send/?phone=971508707137&type=phone_number&app_absent=0&text=';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // ---- WhatsApp click conversion tracking -> GTM dataLayer (event: whatsapp_click) ----
+  function trackWA(loc){ window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'whatsapp_click', wa_location: loc }); }
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+    if(!/wa\.me|api\.whatsapp\.com|whatsapp:\/\//i.test(a.getAttribute('href') || '')) return;
+    var loc = a.classList.contains('wa-fab') ? 'fab'
+      : a.classList.contains('svc-book') ? 'service'
+      : a.classList.contains('req') ? 'therapist'
+      : a.closest('#visit') ? 'visit'
+      : a.closest('footer') ? 'footer'
+      : a.closest('header') ? 'header' : 'other';
+    trackWA(loc);
+  }, true);
+
   // ---- reveal on scroll (hero entrance is pure CSS, no JS gate needed) ----
   var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(ents){
     ents.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -1090,6 +1105,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if(ritual) msg+='\nRitual: '+ritual;
       if(name) msg+='\nName: '+name;
       if(phone) msg+='\nPhone: '+phone;
+      trackWA('form');
       window.open(WA+encodeURIComponent(msg),'_blank');
       form.style.display='none'; if(thanks) thanks.style.display='flex';
     });
@@ -1149,6 +1165,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
       if(name) msg+='\nName: '+name;
       if(phone) msg+='\nPhone: '+phone;
+      trackWA('quiz');
       window.open(WA+encodeURIComponent(msg),'_blank');
       close();
     }
