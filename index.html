@@ -210,7 +210,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   /* ============ HEADER ============ */
   header#hd{position:sticky; top:0; z-index:60; background:rgba(18,11,7,.96); -webkit-backdrop-filter:blur(24px) saturate(120%); backdrop-filter:blur(24px) saturate(120%); border-bottom:1px solid rgba(228,211,178,.16); transition:background .4s var(--ease);}
   header#hd.scrolled{background:rgba(18,11,7,.96);}
-  .navrow{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:24px; padding-top:10px; padding-bottom:10px; position:relative;}
+  .navrow{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:24px; padding-top:12px; padding-bottom:12px; position:relative;}
+  .nav-left{display:flex; flex-direction:column; align-items:flex-start; gap:9px; min-width:0;}
+  .nav-right{display:flex; flex-direction:row; align-items:center; justify-content:flex-end; gap:22px; min-width:0;}
+  .nav-right-stack{display:flex; flex-direction:column; align-items:flex-end; gap:7px;}
+  .nav-addr,.nav-hours{font-family:var(--sans); font-weight:400; font-size:11.5px; letter-spacing:.06em; color:rgba(228,211,178,.62); display:inline-flex; align-items:center; gap:8px; white-space:nowrap;}
+  .nav-addr{transition:color .3s var(--ease);}
+  .nav-addr:hover{color:var(--champ);}
+  .nav-addr svg{flex-shrink:0;}
+  @media (max-width:1160px){ .nav-addr,.nav-hours{display:none;} }
   .nav{display:flex; gap:30px; align-items:center;}
   .nav a{font-family:var(--sans); font-weight:500; font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--cream); position:relative; padding:5px 0;}
   .nav a::after{content:""; position:absolute; left:0; bottom:-1px; width:100%; height:1px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .35s var(--ease);}
@@ -221,7 +229,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .brand{justify-self:center; display:flex;}
   .brand img{height:60px; width:auto;}
   .nav-r{justify-content:flex-end;}
-  .nav a.nav-tel{display:inline-flex; align-items:center; gap:8px; font-family:var(--sans); font-weight:400; font-size:15px; letter-spacing:.02em; text-transform:none; color:rgba(251,248,242,.86);}
+  .nav-tel{display:inline-flex; align-items:center; gap:8px; font-family:var(--sans); font-weight:400; font-size:15px; letter-spacing:.02em; text-transform:none; color:rgba(251,248,242,.86);}
   .nav-tel svg{flex-shrink:0;}
   .nav-tel:hover{color:var(--champ);}
   .burger{display:none; position:absolute; right:0; top:50%; transform:translateY(-50%); width:44px; height:44px; background:none; border:none; cursor:pointer; flex-direction:column; justify-content:center; gap:6px; z-index:70;}
@@ -448,7 +456,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @media (max-width:768px){
     .wrap,.sec-head,.svc-wrap,.masters-wrap,.about-grid,.visit-grid,.mosaic,.foot-grid,.foot-bot{padding-left:22px; padding-right:22px;}
     .topstrip{display:none;}
-    .nav{display:none;}
+    .nav-left,.nav-right{display:none;}
     .burger{display:flex;}
     .brand{justify-self:start;}
     .brand img{height:46px;}
@@ -522,35 +530,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<!-- ===================== TOP STRIP ===================== -->
-<div class="topstrip">
-  <div class="wrap">
-    <a href="https://maps.app.goo.gl/ujKnZNisrzdTiYjg8" target="_blank" rel="noopener">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B08A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-      R floor, Courtyard by Marriott World Trade Center, Al Satwa, Dubai
-    </a>
-    <div style="display:flex; align-items:center;">
-      <span>Open daily 10:00 to 01:00</span>
-    </div>
-  </div>
-</div>
-
 <!-- ===================== HEADER ===================== -->
 <header id="hd">
   <div class="wrap">
     <div class="navrow">
-      <nav class="nav">
-        <a href="#treatments">Rituals</a>
-        <a href="#masters">Therapists</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#visit">Visit</a>
-        <a href="hiring.html">Hiring</a>
-      </nav>
+      <div class="nav-left">
+        <a class="nav-addr" href="https://maps.app.goo.gl/ujKnZNisrzdTiYjg8" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B08A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          R floor, Courtyard by Marriott World Trade Center, Al Satwa, Dubai
+        </a>
+        <nav class="nav">
+          <a href="#treatments">Rituals</a>
+          <a href="#masters">Therapists</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#visit">Visit</a>
+          <a href="hiring.html">Hiring</a>
+        </nav>
+      </div>
       <a href="#top" class="brand" aria-label="Elis Spa"><img src="logo-champ.svg" alt="Elis Spa" width="180" height="60"></a>
-      <nav class="nav nav-r">
-        <a class="nav-tel" href="tel:+971508707137"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B08A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z"></path></svg>+971 50 870 7137</a>
+      <div class="nav-right">
+        <div class="nav-right-stack">
+          <span class="nav-hours">Open daily 10:00 to 01:00</span>
+          <a class="nav-tel" href="tel:+971508707137"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B08A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z"></path></svg>+971 50 870 7137</a>
+        </div>
         <a class="btn btn-wline btn-sm" href="https://api.whatsapp.com/send/?phone=971508707137&type=phone_number&app_absent=0&text=Hello%20Elis%20Spa%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener">WhatsApp</a>
-      </nav>
+      </div>
       <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
