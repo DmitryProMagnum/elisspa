@@ -340,14 +340,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* ============ VISIT ============ */
   #visit{padding:54px 0 40px;}
-  .visit-grid{display:grid; grid-template-columns:1fr 1fr; gap:66px; align-items:start; max-width:1180px; margin:0 auto; padding:0 46px;}
+  .visit-grid{display:grid; grid-template-columns:1fr 1fr; gap:66px; align-items:stretch; max-width:1180px; margin:0 auto; padding:0 46px;}
+  .visit-info{display:flex; flex-direction:column;}
   .visit-lead{font-size:16px; line-height:1.8; color:var(--ink-soft); max-width:40ch; margin:22px 0 32px;}
   .vlist{border-top:1px solid var(--hair-2);}
   .vrow{display:flex; align-items:flex-start; gap:18px; padding:17px 0; border-bottom:1px solid var(--hair);}
   .vrow .k{font-family:var(--sans); font-weight:500; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep); width:78px; flex-shrink:0; padding-top:7px;}
   .vrow .v{font-family:var(--serif); font-weight:400; font-size:20px; color:var(--ink); line-height:1.35;}
   a.v:hover{color:var(--gold-deep);}
-  .panel{background:var(--cream); border:1px solid var(--hair-2); padding:40px;}
+  .panel{background:var(--cream); border:1px solid var(--hair-2); padding:40px; margin-top:34px;}
   .panel h3{font-family:var(--serif); font-weight:400; font-size:28px; margin:0 0 24px; color:var(--ink);}
   .field{margin-bottom:20px;}
   .field label{font-family:var(--sans); font-weight:500; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep);}
@@ -357,10 +358,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .thanks{display:none; min-height:340px; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:15px;}
   .thanks .ring{width:72px; height:72px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:32px; color:var(--gold-deep);}
   .thanks h3{margin:0;} .thanks p{font-size:14px; line-height:1.6; color:var(--ink-soft); max-width:300px; margin:0;}
-  .maprow{position:relative; margin-top:66px;}
-  .maprow .frame{display:block;}
-  .maprow .frame .plate{padding:8px;}
-  .maprow iframe{width:100%; height:440px; border:0; display:block; filter:grayscale(.2) sepia(.32) brightness(.94) contrast(1.02);}
+  .maprow{position:relative; margin-top:0; display:flex; flex-direction:column; min-height:520px;}
+  .maprow .frame{display:flex; flex-direction:column; flex:1;}
+  .maprow .frame .plate{padding:8px; flex:1;}
+  .maprow iframe{width:100%; height:100%; min-height:520px; border:0; display:block; filter:grayscale(.2) sepia(.32) brightness(.94) contrast(1.02);}
   .maprow .dir{position:absolute; left:50%; bottom:28px; transform:translateX(-50%); z-index:3;}
 
   /* ============ FOOTER (espresso) ============ */
@@ -495,7 +496,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .foot-mark{font-size:96px;}
     .foot-bot{flex-direction:column; align-items:flex-start;}
     .panel{padding:28px 22px;}
-    .maprow{margin-top:46px;} .maprow iframe{height:360px;}
+    .maprow{margin-top:0; min-height:0;} .maprow iframe{height:420px; min-height:0;}
 
     .q-card{padding:38px 20px 24px;}
     .q-grid,.q-grid.th{grid-template-columns:repeat(2,1fr);}
@@ -837,7 +838,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2 class="sec-title">Your ritual <em>awaits</em></h2>
   </div>
   <div class="visit-grid">
-    <div class="reveal">
+    <div class="reveal visit-info">
       <p class="visit-lead">Message us on WhatsApp or leave your details and our team will confirm your session shortly. We are open every day.</p>
       <div class="vlist">
         <div class="vrow">
@@ -853,51 +854,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="v">Daily · 10:00 to 01:00</span>
         </div>
       </div>
-    </div>
 
-    <div class="panel reveal">
-      <div class="thanks" id="thanks">
-        <div class="ring">&#10003;</div>
-        <h3 class="serif" style="font-size:32px;">Thank you</h3>
-        <p>Your request has been received. We will reach out on WhatsApp shortly to confirm your ritual.</p>
+      <div class="panel">
+        <div class="thanks" id="thanks">
+          <div class="ring">&#10003;</div>
+          <h3 class="serif" style="font-size:32px;">Thank you</h3>
+          <p>Your request has been received. We will reach out on WhatsApp shortly to confirm your ritual.</p>
+        </div>
+        <form id="bookForm">
+          <h3>Request on WhatsApp</h3>
+          <div class="field">
+            <label>Name</label>
+            <input required type="text" placeholder="Your name">
+          </div>
+          <div class="field">
+            <label>Preferred ritual</label>
+            <select aria-label="Preferred ritual">
+              <option>Tension Relaxation Massage</option>
+              <option>Deep Muscle Relaxation Massage</option>
+              <option>Essential Oil Aroma Massage</option>
+              <option>Thai Tranquility Therapy</option>
+              <option>Hot Stone Enjoyment Massage</option>
+              <option>Izil Diamond Mineralizing Facial</option>
+              <option>Double Relaxation Massage</option>
+              <option>Indulgences for Two</option>
+              <option>Signature Bamboo Fusion Massage</option>
+              <option>Traditional Thai Stretching Massage</option>
+              <option>Moroccan Bath Body Ritual</option>
+            </select>
+          </div>
+          <button class="btn btn-espresso" type="submit">Send via WhatsApp</button>
+        </form>
       </div>
-      <form id="bookForm">
-        <h3>Request a session</h3>
-        <div class="field">
-          <label>Name</label>
-          <input required type="text" placeholder="Your name">
-        </div>
-        <div class="field">
-          <label>WhatsApp number</label>
-          <input required type="tel" placeholder="+971 ...">
-        </div>
-        <div class="field">
-          <label>Preferred ritual</label>
-          <select aria-label="Preferred ritual">
-            <option>Tension Relaxation Massage</option>
-            <option>Deep Muscle Relaxation Massage</option>
-            <option>Essential Oil Aroma Massage</option>
-            <option>Thai Tranquility Therapy</option>
-            <option>Hot Stone Enjoyment Massage</option>
-            <option>Izil Diamond Mineralizing Facial</option>
-            <option>Double Relaxation Massage</option>
-            <option>Indulgences for Two</option>
-            <option>Signature Bamboo Fusion Massage</option>
-            <option>Traditional Thai Stretching Massage</option>
-            <option>Moroccan Bath Body Ritual</option>
-          </select>
-        </div>
-        <button class="btn btn-espresso" type="submit">Send via WhatsApp</button>
-      </form>
     </div>
-  </div>
 
-  <div class="maprow reveal">
-    <div class="frame">
-      <span class="ghost"></span>
-      <div class="plate"><iframe id="map" title="Elis Spa location on Google Maps" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.2593938498458!2d55.283284099999996!3d25.228186800000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f434290148afb%3A0x84615fd306b8345c!2sElis%20Spa!5e0!3m2!1sen!2sae!4v1783433969054!5m2!1sen!2sae" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <div class="maprow reveal">
+      <div class="frame">
+        <span class="ghost"></span>
+        <div class="plate"><iframe id="map" title="Elis Spa location on Google Maps" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.2593938498458!2d55.283284099999996!3d25.228186800000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f434290148afb%3A0x84615fd306b8345c!2sElis%20Spa!5e0!3m2!1sen!2sae!4v1783433969054!5m2!1sen!2sae" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      </div>
+      <a class="btn btn-espresso dir" href="https://maps.app.goo.gl/ujKnZNisrzdTiYjg8" target="_blank" rel="noopener">Get directions</a>
     </div>
-    <a class="btn btn-espresso dir" href="https://maps.app.goo.gl/ujKnZNisrzdTiYjg8" target="_blank" rel="noopener">Get directions</a>
   </div>
 </section>
 
@@ -1116,12 +1113,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     form.addEventListener('submit', function(e){
       e.preventDefault();
       var name=(form.querySelector('input[type=text]')||{}).value||'';
-      var phone=(form.querySelector('input[type=tel]')||{}).value||'';
       var ritual=(form.querySelector('select')||{}).value||'';
       var msg='Hello Elis Spa, I would like to request a session.';
       if(ritual) msg+='\nRitual: '+ritual;
       if(name) msg+='\nName: '+name;
-      if(phone) msg+='\nPhone: '+phone;
       trackWA('contact_form', ritual||null);
       window.open(WA+encodeURIComponent(msg),'_blank');
       form.style.display='none'; if(thanks) thanks.style.display='flex';
