@@ -210,7 +210,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   /* ============ HEADER ============ */
   header#hd{position:sticky; top:0; z-index:60; background:rgba(18,11,7,.9); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-bottom:1px solid rgba(228,211,178,.16); transition:background .4s var(--ease);}
   header#hd.scrolled{background:rgba(18,11,7,.92);}
-  .navrow{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:24px; padding-top:16px; padding-bottom:16px; position:relative;}
+  .navrow{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:24px; padding-top:10px; padding-bottom:10px; position:relative;}
   .nav{display:flex; gap:30px; align-items:center;}
   .nav a{font-family:var(--sans); font-weight:500; font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--cream); position:relative; padding:5px 0;}
   .nav a::after{content:""; position:absolute; left:0; bottom:-1px; width:100%; height:1px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .35s var(--ease);}
@@ -219,7 +219,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .nav a.btn.btn-gold{color:#28190C;}
   .nav a.btn::after{content:none;}
   .brand{justify-self:center; display:flex;}
-  .brand img{height:42px; width:auto;}
+  .brand img{height:60px; width:auto;}
   .nav-r{justify-content:flex-end;}
   .nav-tel{font-family:var(--sans); font-weight:400; font-size:13.5px; letter-spacing:.02em; color:rgba(251,248,242,.74);}
   .nav-tel:hover{color:var(--champ);}
@@ -450,6 +450,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .nav{display:none;}
     .burger{display:flex;}
     .brand{justify-self:start;}
+    .brand img{height:46px;}
     .navrow{grid-template-columns:1fr auto;}
     .mmenu{display:flex; flex-direction:column; position:absolute; left:0; right:0; top:100%; background:rgba(18,11,7,.96); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-bottom:1px solid var(--hair-d); padding:0 24px; z-index:55; max-height:0; overflow:hidden; opacity:0; pointer-events:none; transition:max-height .38s var(--ease), opacity .25s, padding .38s var(--ease);}
     .mmenu.open{max-height:84vh; opacity:1; pointer-events:auto; padding:10px 24px 26px;}
@@ -529,8 +530,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
     <div style="display:flex; align-items:center;">
       <span>Open daily 10:00 to 01:00</span>
-      <span class="sep"><span class="diamond"></span></span>
-      <a href="tel:+971508707137">+971 50 870 7137</a>
     </div>
   </div>
 </div>
@@ -546,7 +545,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="#visit">Visit</a>
         <a href="hiring.html">Hiring</a>
       </nav>
-      <a href="#top" class="brand" aria-label="Elis Spa"><img src="logo-champ.svg" alt="Elis Spa" width="126" height="42"></a>
+      <a href="#top" class="brand" aria-label="Elis Spa"><img src="logo-champ.svg" alt="Elis Spa" width="180" height="60"></a>
       <nav class="nav nav-r">
         <a class="nav-tel" href="tel:+971508707137">+971 50 870 7137</a>
         <a class="btn btn-wline btn-sm" href="https://api.whatsapp.com/send/?phone=971508707137&type=phone_number&app_absent=0&text=Hello%20Elis%20Spa%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener">WhatsApp</a>
