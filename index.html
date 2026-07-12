@@ -993,11 +993,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="q-step" data-step="3" hidden>
       <h3 class="q-title">Your details</h3>
-      <p class="q-sub">Leave your name and phone, or just send and we will reply on WhatsApp.</p>
+      <p class="q-sub">Leave your name, or just send and we will reply on WhatsApp.</p>
       <div class="q-summ" id="qSumm"></div>
       <div class="q-form">
         <input id="qName" type="text" placeholder="Your name">
-        <input id="qPhone" type="tel" placeholder="+971 ...">
       </div>
     </div>
 
@@ -1148,7 +1147,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       steps.forEach(function(s){ s.hidden=(parseInt(s.getAttribute('data-step'),10)!==n); });
       nodes.forEach(function(nd){ nd.classList.toggle('on', parseInt(nd.getAttribute('data-node'),10)<=n); });
       qBack.style.visibility=n===1?'hidden':'visible';
-      qNext.textContent=n===TOTAL?'Confirm on WhatsApp':'Next';
+      qNext.textContent=n===TOTAL?'Consultation on WhatsApp':'Next';
       qNext.style.display=n===TOTAL?'':'none';
       qCount.textContent='Step '+n+' of '+TOTAL;
       if(n===TOTAL) fillSumm();
@@ -1172,7 +1171,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
     function submit(){
       var name=(document.getElementById('qName')||{}).value||'';
-      var phone=(document.getElementById('qPhone')||{}).value||'';
       var msg;
       if(pick.consult){ msg='Hello Elis Spa, I would like a consultation to choose the right ritual.'; }
       else {
@@ -1182,7 +1180,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         else if(pick.therapist==='__any') msg+='\nTherapist: any available';
       }
       if(name) msg+='\nName: '+name;
-      if(phone) msg+='\nPhone: '+phone;
       trackWA('quiz', (pick.consult?null:pick.ritual)||null);
       window.open(WA+encodeURIComponent(msg),'_blank');
       close();
@@ -1193,7 +1190,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       pick={ritual:null,ritualImg:null,therapist:null,consult:false};
       quiz.querySelectorAll('.q-opt').forEach(function(o){ o.classList.remove('sel'); });
       var n=document.getElementById('qName'); if(n) n.value='';
-      var p=document.getElementById('qPhone'); if(p) p.value='';
       show(1); quiz.hidden=false; document.body.style.overflow='hidden';
     }
     function close(){ quiz.hidden=true; document.body.style.overflow=''; }
