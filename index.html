@@ -358,10 +358,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .thanks{display:none; min-height:340px; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:15px;}
   .thanks .ring{width:72px; height:72px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:32px; color:var(--gold-deep);}
   .thanks h3{margin:0;} .thanks p{font-size:14px; line-height:1.6; color:var(--ink-soft); max-width:300px; margin:0;}
-  .maprow{position:relative; margin-top:0; display:flex; flex-direction:column; min-height:520px;}
-  .maprow .frame{display:flex; flex-direction:column; flex:1;}
-  .maprow .frame .plate{padding:8px; flex:1;}
-  .maprow iframe{width:100%; height:100%; min-height:520px; border:0; display:block; filter:grayscale(.2) sepia(.32) brightness(.94) contrast(1.02);}
+  .maprow{position:relative; margin-top:0; display:flex; flex-direction:column;}
+  .maprow iframe{width:100%; height:100%; flex:1; min-height:420px; border:0; display:block; filter:grayscale(.2) sepia(.28) brightness(.97) contrast(1.02);}
   .maprow .dir{position:absolute; left:50%; bottom:28px; transform:translateX(-50%); z-index:3;}
 
   /* ============ FOOTER (espresso) ============ */
@@ -889,10 +887,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="maprow reveal">
-      <div class="frame">
-        <span class="ghost"></span>
-        <div class="plate"><iframe id="map" title="Elis Spa location on Google Maps" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.2593938498458!2d55.283284099999996!3d25.228186800000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f434290148afb%3A0x84615fd306b8345c!2sElis%20Spa!5e0!3m2!1sen!2sae!4v1783433969054!5m2!1sen!2sae" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-      </div>
+      <iframe id="map" title="Elis Spa location on Google Maps" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.2593938498458!2d55.283284099999996!3d25.228186800000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f434290148afb%3A0x84615fd306b8345c!2sElis%20Spa!5e0!3m2!1sen!2sae!4v1783433969054!5m2!1sen!2sae" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       <a class="btn btn-espresso dir" href="https://maps.app.goo.gl/ujKnZNisrzdTiYjg8" target="_blank" rel="noopener">Get directions</a>
     </div>
   </div>
