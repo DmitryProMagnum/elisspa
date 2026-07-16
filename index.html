@@ -222,7 +222,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   /* mobile header info strip (address + hours), like the top line above the logo */
   .m-strip{display:none;}
   @media (max-width:768px){
-    .m-strip{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 22px; border-bottom:1px solid rgba(228,211,178,.14); font-family:var(--sans); font-weight:400; font-size:11px; letter-spacing:.05em; color:rgba(228,211,178,.72); white-space:nowrap;}
+    .m-strip{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 22px; border-bottom:1px solid rgba(228,211,178,.14); font-family:var(--sans); font-weight:400; font-size:11px; letter-spacing:.05em; color:rgba(228,211,178,.72); white-space:nowrap; max-height:40px; overflow:hidden; transition:max-height .35s var(--ease), padding .35s var(--ease), opacity .25s ease, border-color .25s ease;}
+    header#hd.scrolled .m-strip{max-height:0; padding-top:0; padding-bottom:0; opacity:0; border-bottom-color:transparent;}
     .m-strip a,.m-strip span{color:rgba(228,211,178,.72); display:inline-flex; align-items:center; gap:7px;}
     .m-strip svg{flex-shrink:0;}
   }
