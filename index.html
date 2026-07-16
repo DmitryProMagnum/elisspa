@@ -219,6 +219,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .nav-addr:hover{color:var(--champ);}
   .nav-addr svg{flex-shrink:0;}
   @media (max-width:1160px){ .nav-addr,.nav-hours{display:none;} }
+  /* mobile header info strip (address + hours), like the top line above the logo */
+  .m-strip{display:none;}
+  @media (max-width:768px){
+    .m-strip{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 22px; border-bottom:1px solid rgba(228,211,178,.14); font-family:var(--sans); font-weight:400; font-size:11px; letter-spacing:.05em; color:rgba(228,211,178,.72); white-space:nowrap;}
+    .m-strip a,.m-strip span{color:rgba(228,211,178,.72); display:inline-flex; align-items:center; gap:7px;}
+    .m-strip svg{flex-shrink:0;}
+  }
   .nav{display:flex; gap:30px; align-items:center;}
   .nav a{font-family:var(--sans); font-weight:500; font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--cream); position:relative; padding:5px 0;}
   .nav a::after{content:""; position:absolute; left:0; bottom:-1px; width:100%; height:1px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .35s var(--ease);}
@@ -543,6 +550,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ===================== HEADER ===================== -->
 <header id="hd">
+  <div class="m-strip">
+    <a href="https://maps.app.goo.gl/ujKnZNisrzdTiYjg8" target="_blank" rel="noopener"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B08A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>Al Satwa, Dubai</a>
+    <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B08A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Open daily 10:00 to 01:00</span>
+  </div>
   <div class="wrap">
     <div class="navrow">
       <div class="nav-left">
