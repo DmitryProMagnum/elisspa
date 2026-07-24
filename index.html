@@ -395,7 +395,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .foot-bot{position:relative; max-width:var(--wrap); margin:44px auto 0; padding:22px 46px 0; border-top:1px solid var(--hair-d); display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;}
   .foot-legal{display:flex; gap:20px; flex-wrap:wrap; font-family:var(--sans); font-weight:500; font-size:10px; letter-spacing:.14em; text-transform:uppercase;}
   .foot-legal a{color:rgba(228,211,178,.6);} .foot-legal a:hover{color:var(--champ);}
-  .foot-copy{font-size:10.5px; letter-spacing:.05em; color:rgba(228,211,178,.45);}
+  .foot-copy{font-size:10.5px; letter-spacing:.05em; color:rgba(228,211,178,.7);}
 
   /* ============ WHATSAPP FAB ============ */
   .wa-fab{position:fixed; right:24px; bottom:24px; z-index:90; width:62px; height:62px; border-radius:50%; background:#25D366; border:none; display:flex; align-items:center; justify-content:center; box-shadow:0 12px 28px -8px rgba(37,211,102,.55), 0 4px 10px -3px rgba(0,0,0,.35); animation:floaty 4s var(--ease) infinite; transition:transform .25s var(--ease), box-shadow .25s var(--ease);}
@@ -601,9 +601,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ===================== HERO (full-bleed video) ===================== -->
 <section class="hero" id="top">
-  <video class="hero-vid" poster="gallery/hero-poster.jpg" autoplay muted loop playsinline preload="metadata">
-    <source src="gallery/hero.webm" type="video/webm">
-    <source src="gallery/hero.mp4" type="video/mp4">
+  <video class="hero-vid" poster="gallery/hero-poster.jpg" muted loop playsinline preload="none">
+    <source data-src="gallery/hero.webm" type="video/webm">
+    <source data-src="gallery/hero.mp4" type="video/mp4">
     <img src="gallery/hero.webp" alt="A ritual at Elis Spa">
   </video>
   <div class="hero-overlay"></div>
@@ -810,7 +810,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="mosaic reveal">
     <div class="tile t-a"><img loading="lazy" src="services/moroccan.webp" alt="Moroccan bath ritual"></div>
-    <div class="tile t-vid"><video poster="gallery/interior-poster.jpg" autoplay muted loop playsinline preload="metadata"><source src="gallery/interior.webm" type="video/webm"><source src="gallery/interior.mp4" type="video/mp4"></video></div>
+    <div class="tile t-vid"><video poster="gallery/interior-poster.jpg" muted loop playsinline preload="none"><source data-src="gallery/interior.webm" type="video/webm"><source data-src="gallery/interior.mp4" type="video/mp4"></video></div>
     <div class="tile t-c"><img loading="lazy" src="services/bamboo.webp" alt="Bamboo fusion massage"></div>
     <div class="t-quote"><p>Where the noise of<br>the city is left<br>at the door.</p></div>
     <div class="tile t-d"><img loading="lazy" src="services/hot_stone.webp" alt="Hot stone massage"></div>
@@ -926,7 +926,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ===================== FOOTER ===================== -->
 <footer>
-  <div class="foot-mark">ELIS</div>
+  <div class="foot-mark" aria-hidden="true">ELIS</div>
   <div class="foot-grid">
     <div class="foot-brand">
       <a href="#top"><img src="logo-champ.svg" alt="Elis Spa"></a>
@@ -1102,6 +1102,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   setTopH();
   window.addEventListener('resize', setTopH);
   window.addEventListener('load', setTopH);
+
+  // ---- videos: load on wider screens only; phones / save-data keep the poster ----
+  (function(){
+    var big = window.matchMedia('(min-width:769px)').matches;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if(!big || saveData) return;
+    function activate(v){
+      if(!v || v.dataset.on) return; v.dataset.on='1';
+      v.querySelectorAll('source[data-src]').forEach(function(s){ s.src=s.getAttribute('data-src'); });
+      v.load(); var p=v.play(); if(p && p.catch) p.catch(function(){});
+    }
+    activate(document.querySelector('.hero-vid'));
+    var iv=document.querySelector('.t-vid video');
+    if(iv){
+      if('IntersectionObserver' in window){
+        var io2=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ activate(iv); io2.disconnect(); } }); },{rootMargin:'500px'});
+        io2.observe(iv);
+      } else activate(iv);
+    }
+  })();
 
   // ---- lazy map ----
   var map=document.getElementById('map');
